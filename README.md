@@ -18,7 +18,7 @@
 * django-crispy-forms 1.7.0
 
 
-# Instagram clone with Django 2.0
+# Instagram clone (Django 2.0)
 
 A Instagram clone made with django framework.
 
