@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-from django.core.urlresolvers import reverse
-from django.utils.encoding import python_2_unicode_compatible
-
+from django.urls import reverse
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password):
@@ -32,7 +30,6 @@ class UserManager(BaseUserManager):
         return user
 
 
-@python_2_unicode_compatible
 class User(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
@@ -75,11 +72,9 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
-
-@python_2_unicode_compatible
 class Connection(models.Model):
-    follower = models.ForeignKey(User, related_name='follower')
-    following = models.ForeignKey(User, related_name='following')
+    follower = models.ForeignKey(User, related_name='follower',on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='following',on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

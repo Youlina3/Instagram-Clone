@@ -1,11 +1,12 @@
-from __future__ import absolute_import
+from django.shortcuts import render
 
+# Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404
 from django.views import generic
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 
 from braces import views
 from posts.helpers import get_posts

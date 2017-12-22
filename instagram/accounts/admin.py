@@ -3,12 +3,13 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin
 
 from accounts.models import User, Connection
-from .forms import UserCreationForm, UserChangeForm
+#from .forms import UserCreationForm, UserChangeForm
+# Register your models here.
 
 
 class UserAdmin(UserAdmin):
-    form = UserChangeForm
-    add_form = UserCreationForm
+#    form = UserChangeForm
+#    add_form = UserCreationForm
 
     list_display = ('username', 'email', 'is_admin')
     list_filter = ('is_admin',)
