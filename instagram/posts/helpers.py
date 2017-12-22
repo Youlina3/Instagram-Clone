@@ -1,5 +1,4 @@
 from django.db.models import Prefetch
-
 from posts.models import Post, Like
 from accounts.models import Connection, User
 
@@ -11,7 +10,7 @@ def get_posts(user=None, wall=False):
     if isinstance(user, str):
         user = User.objects.get(username=user)
 
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return None
 
     users = [user, ]

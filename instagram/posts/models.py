@@ -1,10 +1,7 @@
 import string as str
 from random import choice
-
 from django.db import models
-from django.core.urlresolvers import reverse
-from django.utils.encoding import python_2_unicode_compatible
-
+from django.urls import reverse
 from accounts.models import User
 
 
@@ -13,10 +10,8 @@ def generate_id():
         random = str.ascii_uppercase + str.ascii_lowercase + str.digits
         return ''.join(choice(random) for _ in range(n))
 
-
-@python_2_unicode_compatible
 class Post(models.Model):
-    author = models.ForeignKey(User, related_name='post')
+    author = models.ForeignKey(User, related_name='post',on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, max_length=10, default=generate_id)
     photo = models.FileField(upload_to='posts_photo')
     caption = models.CharField(max_length=50, blank=True)
@@ -34,10 +29,9 @@ class Post(models.Model):
         return reverse('posts:view', kwargs={'slug': self.slug})
 
 
-@python_2_unicode_compatible
 class Like(models.Model):
-    post = models.ForeignKey(Post, related_name='liked_post')
-    user = models.ForeignKey(User, related_name='liker')
+    post = models.ForeignKey(Post, related_name='liked_post',on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='liker',on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
